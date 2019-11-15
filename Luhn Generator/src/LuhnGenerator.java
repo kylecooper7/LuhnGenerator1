@@ -15,6 +15,9 @@ public class LuhnGenerator {
 	static ArrayList<String> writingQueue = new ArrayList<String>();
 	static String temp123 = "";
 	static boolean running = false;
+	
+	static int addUpToCount = 500;
+	
 	public static void main(String[] args) {
 //fillAddUpToFiles();
 		//writeln("List Of Luhn Numbers", "test");
@@ -34,9 +37,9 @@ public class LuhnGenerator {
 		
 		
 		/*  Important Controls */
-		//fillAddUpToFiles(1);
-		loopThrough(2);
-		
+		//fillAddUpToFiles(1000);
+		loopThrough(2000);
+		System.out.println("number of lines: " + countLines("LuhnList"));
 		
 		
 		//System.out.println(temp123);
@@ -221,6 +224,7 @@ public class LuhnGenerator {
 
 	public static void readAddUpToFiles(String fileName, int theDigits)
 	{
+		
 		String line = null;
 		
 		int counter = 0;
@@ -229,7 +233,7 @@ public class LuhnGenerator {
 				FileReader fileReader = new FileReader(fileName);
 				BufferedReader bufferedReader = new BufferedReader(fileReader);
 				
-				while ((line = bufferedReader.readLine()) != null && counter < 400)
+				while ((line = bufferedReader.readLine()) != null && counter < addUpToCount)
 					{
 					String s = "";
 					
@@ -306,4 +310,31 @@ public class LuhnGenerator {
 		//writeln("List Of Luhn Numbers", s);
 	}
 	
+	public static long countLines(String fileName)
+	{
+		long numLines = 0;
+		String line = null;
+		try
+			{
+				FileReader fileReader = new FileReader(fileName);
+				BufferedReader bufferedReader = new BufferedReader(fileReader);
+				
+				while ((line = bufferedReader.readLine()) != null)
+					{
+						// method(line);
+						if(line.length() == 16) {
+					numLines++;
+					}
+					}
+				
+				bufferedReader.close();
+			} catch (FileNotFoundException ex)
+			{
+				System.out.println("Unable to open file '" + fileName + "'");
+			} catch (IOException ex)
+			{
+				System.out.println("Error reading file '" + fileName + "'");
+			}
+		return numLines;
+	}
 }
