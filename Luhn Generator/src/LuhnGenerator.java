@@ -13,12 +13,16 @@ public class LuhnGenerator {
 	static int[] luhnOrder = {0, 5, 1, 6, 2, 7, 3, 8, 4, 9};
 	static String[] theFiles = {"AddUpTo0", "AddUpTo1", "AddUpTo2", "AddUpTo3", "AddUpTo4", "AddUpTo5", "AddUpTo6", "AddUpTo7", "AddUpTo8", "AddUpTo9"};
 	static ArrayList<String> writingQueue = new ArrayList<String>();
+	static String temp123 = "";
+	static boolean running = false;
 	public static void main(String[] args) {
 //fillAddUpToFiles();
 		//writeln("List Of Luhn Numbers", "test");
 		
 		//loopThrough(8);
-		// System.out.println(read2ndLastLine("AddUpTo5"));
+		//System.out.println(read2ndLastLine("LuhnList"));
+		// System.out.println(read2ndLastLine("LuhnList"));
+		//System.out.println(Integer.parseInt("001"));
 		//readAddUpToFiles("LuhnList", 0);
 		/*
 		writingQueue.add("duhhhh");
@@ -30,16 +34,34 @@ public class LuhnGenerator {
 		
 		
 		/*  Important Controls */
-		//fillAddUpToFiles(500);
-		loopThrough(20);
+		//fillAddUpToFiles(1);
+		loopThrough(2);
+		
+		
+		
+		//System.out.println(temp123);
 		
 	}
 
 	public static void loopThrough(int iterations) {
-		int leftOffOdd = -1;
+		int leftOffOdd = 0;
 		int leftOffEven = -1;
 		/*
-		String line = read2ndLastLine("List Of Luhn Numbers");
+		ArrayList<String> theLastOnes = new ArrayList<String>();
+		for(int i = 0; i < 10; i++) {
+			theLastOnes.add(read2ndLastLine(theFiles[i]));
+		}
+		
+	
+		String line = read2ndLastLine("LuhnList");
+		temp123 = "";
+		System.out.println(line);
+		for(int i = 1; i < line.length(); i = i + 2) {
+			temp123 += line.substring(i,  i+1);
+		}
+		
+		
+		
 		String temp1 = ""; 
 		for(int i = 0; i < line.length(); i = i + 2) {
 			temp1 += line.substring(i,  i+1);
@@ -47,9 +69,14 @@ public class LuhnGenerator {
 		if(!(temp1.equals(""))) {
 			leftOffOdd = Integer.parseInt(temp1);
 		}
+		
+		if(theLastOnes.contains(temp123)) {
+			leftOffOdd ++;
+			temp123 = "";
+		}
 		*/
-		int[] theDigits = new int[16];
-		for(int i = leftOffOdd + 1; i < /*Math.pow(10, 8) */ iterations; i++) {
+		
+		for(int i = leftOffOdd ; i < /*Math.pow(10, 8) */ leftOffOdd + iterations; i++) {
 			
 			int addUpTo = (10 - (addDigits(i) % 10))%10;
 			
@@ -127,7 +154,7 @@ public class LuhnGenerator {
 			}
 		}
 		
-		for(int i = leftOffAt + 1; i < /*Math.pow(10, 8 )*/ iterations+ leftOffAt; i++) {
+		for(int i = leftOffAt + 1; i < /*Math.pow(10, 8 )*/ iterations + 1 + leftOffAt; i++) {
 			
 			writeln(theFiles[addDigits(i)%10], Integer.toString(i));
 		}
@@ -202,7 +229,7 @@ public class LuhnGenerator {
 				FileReader fileReader = new FileReader(fileName);
 				BufferedReader bufferedReader = new BufferedReader(fileReader);
 				
-				while ((line = bufferedReader.readLine()) != null && counter < 100)
+				while ((line = bufferedReader.readLine()) != null && counter < 400)
 					{
 					String s = "";
 					
@@ -225,6 +252,8 @@ public class LuhnGenerator {
 					
 					 //System.out.println(s);
 					
+					//if(running || temp123.equals("")) {
+					
 					writingQueue.add(s);
 					
 					if(writingQueue.size() >= maxArrayListSize) {
@@ -239,6 +268,15 @@ public class LuhnGenerator {
 						writeArrayList("LuhnList", writingQueue);
 						writingQueue.clear();
 					}
+					// }
+					
+					
+					/*
+					if(Integer.parseInt(temp123) == Integer.parseInt(line) || temp123.equals("")) {
+						running = true;
+					}
+					*/
+					
 					
 					counter++;
 					}
