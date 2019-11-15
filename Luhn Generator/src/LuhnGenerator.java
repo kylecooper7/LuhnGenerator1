@@ -16,19 +16,26 @@ public class LuhnGenerator {
 	public static void main(String[] args) {
 //fillAddUpToFiles();
 		//writeln("List Of Luhn Numbers", "test");
-		loopThrough();
+		
+		//loopThrough(8);
+		// System.out.println(read2ndLastLine("AddUpTo5"));
 		//readAddUpToFiles("LuhnList", 0);
 		/*
 		writingQueue.add("duhhhh");
 		writingQueue.add("durrrrr");
 		writeArrayList("LuhnList", writingQueue);
 		*/
-		readAddUpToFiles("LuhnList", 1234);
+		//readAddUpToFiles("LuhnList", 1234);
+		
+		
+		
+		/*  Important Controls */
 		//fillAddUpToFiles(500);
-		// System.out.println(read2ndLastLine("AddUpTo5"));
+		loopThrough(20);
+		
 	}
 
-	public static void loopThrough() {
+	public static void loopThrough(int iterations) {
 		int leftOffOdd = -1;
 		int leftOffEven = -1;
 		/*
@@ -42,7 +49,7 @@ public class LuhnGenerator {
 		}
 		*/
 		int[] theDigits = new int[16];
-		for(int i = leftOffOdd + 1; i < /*Math.pow(10, 8) */ 3; i++) {
+		for(int i = leftOffOdd + 1; i < /*Math.pow(10, 8) */ iterations; i++) {
 			
 			int addUpTo = (10 - (addDigits(i) % 10))%10;
 			
@@ -120,7 +127,7 @@ public class LuhnGenerator {
 			}
 		}
 		
-		for(int i = leftOffAt + 1; i < /*Math.pow(10, 8 )*/ iterations; i++) {
+		for(int i = leftOffAt + 1; i < /*Math.pow(10, 8 )*/ iterations+ leftOffAt; i++) {
 			
 			writeln(theFiles[addDigits(i)%10], Integer.toString(i));
 		}
